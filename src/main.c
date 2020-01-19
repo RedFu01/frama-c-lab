@@ -29,25 +29,27 @@ double pow2(double a);
   @ assigns successes[0..1], target_x, target_y, needle_x, needle_y, v_y;
   @*/
 int main(int argc, char *argv[]) {
-	// /*@ loop invariant 0 <= i <= 2;
- 	//   @ loop assigns i, target_x, target_y, needle_x, needle_y, v_y, successes[0..1];
-  //   @*/
-  // for(int i = 0; i< 2; i++) {
-  //   target_x = target_points_x[i];
-  //   target_y = target_points_y[i];
-  //   successes[i] = check_one();
-  //   reset();
-  // }
-
-    target_x = target_points_x[0];
-    target_y = target_points_y[0];
-    successes[0] = check_one();
+	/*@ loop invariant \forall integer k; 0 <= k < i ==> successes[k] == true;
+    @ loop invariant 0 <= i <= 2;
+ 	  @ loop assigns i, target_x, target_y, needle_x, needle_y, v_y, successes[0..1];
+    @ loop variant 2-i;
+    @*/
+  for(int i = 0; i< 2; i++) {
+    target_x = target_points_x[i];
+    target_y = target_points_y[i];
+    successes[i] = check_one();
     reset();
+  }
 
-    target_x = target_points_x[1];
-    target_y = target_points_y[1];
-    successes[1] = check_one();
-    reset();
+    // target_x = target_points_x[0];
+    // target_y = target_points_y[0];
+    // successes[0] = check_one();
+    // reset();
+
+    // target_x = target_points_x[1];
+    // target_y = target_points_y[1];
+    // successes[1] = check_one();
+    // reset();
   return 0;
 }
 
@@ -57,8 +59,7 @@ int main(int argc, char *argv[]) {
   @*/
 bool check_one()
 {
-	/*@ loop invariant needle_x >= 0 && needle_x <= target_x + target_radius;
- 	  @ loop assigns needle_x, needle_y, v_y;
+	/*@ loop assigns needle_x, needle_y, v_y;
     @*/
 	while (!is_in_target_region())
 	{
@@ -95,8 +96,7 @@ bool is_in_target_region()
 	return pow2(needle_x - target_x) + pow2(needle_y - target_y) <= pow2(target_radius);
 }
 
-/*@ requires target_y >= 0;
-  @ assigns \nothing;
+/*@ assigns \nothing;
   @ behavior positive:
   @	  assumes (needle_y - target_y) * (needle_y - target_y) <= target_radius * target_radius;
   @	  ensures \result == true;
