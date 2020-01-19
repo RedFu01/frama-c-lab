@@ -1,0 +1,133 @@
+directory	file	line	function	property kind	status	property
+FRAMAC_SHARE/libc	__fc_builtin_for_normalization.i	31	Frama_C_bzero	assigns clause	Considered valid	assigns *(dest+(0 .. n-1));
+FRAMAC_SHARE/libc	__fc_builtin_for_normalization.i	31	Frama_C_bzero	from clause	Considered valid	assigns *(dest+(0 .. n-1)) \from \nothing;
+FRAMAC_SHARE/libc	__fc_builtin_for_normalization.i	32	Frama_C_bzero	postcondition	Considered valid	∀ ℤ i; 0 ≤ i < \old(n) ⇒ *(\old(dest)+i) ≡ 0
+FRAMAC_SHARE/libc	__fc_builtin_for_normalization.i	39	Frama_C_copy_block	assigns clause	Considered valid	assigns *(dest+(size .. size*n-1));
+FRAMAC_SHARE/libc	__fc_builtin_for_normalization.i	39	Frama_C_copy_block	from clause	Considered valid	assigns *(dest+(size .. size*n-1)) \from *(dest+(0 .. size-1));
+FRAMAC_SHARE/libc	__fc_builtin_for_normalization.i	40	Frama_C_copy_block	postcondition	Considered valid	∀ ℤ i, ℤ j; 0 ≤ i < \old(size) ∧ 1 ≤ j < \old(n) ⇒ *(\old(dest)+(i+j*\old(size))) ≡ *(\old(dest)+i)
+FRAMAC_SHARE/libc	stdio.h	68	remove	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	71	rename	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	74	tmpfile	postcondition	Considered valid	\result ≡ \null ∨ (\valid(\result) ∧ \fresh{Old, Here}(\result,sizeof(FILE)))
+FRAMAC_SHARE/libc	stdio.h	75	tmpfile	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	78	tmpnam	assigns clause	Considered valid	assigns \result, *(s+(..));
+FRAMAC_SHARE/libc	stdio.h	78	tmpnam	from clause	Considered valid	assigns \result \from *(s+(..));
+FRAMAC_SHARE/libc	stdio.h	79	tmpnam	from clause	Considered valid	assigns *(s+(..)) \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	86	fclose	from clause	Considered valid	assigns \result \from stream, stream->__fc_stdio_id;
+FRAMAC_SHARE/libc	stdio.h	87	fclose	postcondition	Considered valid	\result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdio.h	90	fclose	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	94	fflush	from clause	Considered valid	assigns \result \from stream, stream->__fc_stdio_id;
+FRAMAC_SHARE/libc	stdio.h	95	fflush	postcondition	Considered valid	\result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdio.h	98	fflush	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	104	fopen	from clause	Considered valid	assigns \result \from *(filename+(..)), *(mode+(..)), __p_fc_fopen;
+FRAMAC_SHARE/libc	stdio.h	106	fopen	postcondition	Considered valid	\result ≡ \null ∨ \subset(\result, &__fc_fopen[0 .. 512-1])
+FRAMAC_SHARE/libc	stdio.h	109	fopen	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	112	fdopen	from clause	Considered valid	assigns \result \from fildes, *(mode+(..));
+FRAMAC_SHARE/libc	stdio.h	113	fdopen	postcondition	Considered valid	\result ≡ \null ∨ (\valid(\result) ∧ \fresh{Old, Here}(\result,sizeof(FILE)))
+FRAMAC_SHARE/libc	stdio.h	115	fdopen	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	118	freopen	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	119	freopen	postcondition	Considered valid	\result ≡ \null ∨ \result ≡ \old(stream)
+FRAMAC_SHARE/libc	stdio.h	124	setbuf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	124	setbuf	from clause	Considered valid	assigns *stream \from buf;
+FRAMAC_SHARE/libc	stdio.h	128	setvbuf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	128	setvbuf	from clause	Considered valid	assigns *stream \from buf, mode, size;
+FRAMAC_SHARE/libc	stdio.h	133	fprintf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	133	fprintf	from clause	Considered valid	assigns *stream \from stream->__fc_stdio_id;
+FRAMAC_SHARE/libc	stdio.h	138	fscanf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	138	fscanf	from clause	Considered valid	assigns *stream \from stream->__fc_stdio_id;
+FRAMAC_SHARE/libc	stdio.h	144	printf	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	144	printf	from clause	Considered valid	assigns *__fc_stdout \from *(format+(..));
+FRAMAC_SHARE/libc	stdio.h	149	scanf	assigns clause	Considered valid	assigns *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	154	snprintf	assigns clause	Considered valid	assigns *(s+(0 .. n-1));
+FRAMAC_SHARE/libc	stdio.h	160	sprintf	assigns clause	Considered valid	assigns *(s+(0 ..));
+FRAMAC_SHARE/libc	stdio.h	170	vfprintf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	170	vfprintf	from clause	Considered valid	assigns *stream \from *(format+(..)), arg;
+FRAMAC_SHARE/libc	stdio.h	175	vfscanf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	175	vfscanf	from clause	Considered valid	assigns *stream \from *(format+(..)), *stream;
+FRAMAC_SHARE/libc	stdio.h	181	vprintf	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	181	vprintf	from clause	Considered valid	assigns *__fc_stdout \from arg;
+FRAMAC_SHARE/libc	stdio.h	185	vscanf	assigns clause	Considered valid	assigns *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	185	vscanf	from clause	Considered valid	assigns *__fc_stdin \from *(format+(..));
+FRAMAC_SHARE/libc	stdio.h	190	vsnprintf	assigns clause	Considered valid	assigns *(s+(0 .. n-1));
+FRAMAC_SHARE/libc	stdio.h	190	vsnprintf	from clause	Considered valid	assigns *(s+(0 .. n-1)) \from *(format+(..)), arg;
+FRAMAC_SHARE/libc	stdio.h	196	vsprintf	assigns clause	Considered valid	assigns *(s+(0 ..));
+FRAMAC_SHARE/libc	stdio.h	196	vsprintf	from clause	Considered valid	assigns *(s+(0 ..)) \from *(format+(..)), arg;
+FRAMAC_SHARE/libc	stdio.h	207	fgetc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	211	fgets	assigns clause	Considered valid	assigns *(s+(0 .. n-1)), *stream, \result;
+FRAMAC_SHARE/libc	stdio.h	211	fgets	from clause	Considered valid	assigns *(s+(0 .. n-1)) \from *stream;
+FRAMAC_SHARE/libc	stdio.h	211	fgets	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	212	fgets	from clause	Considered valid	assigns \result \from s, n, *stream;
+FRAMAC_SHARE/libc	stdio.h	213	fgets	postcondition	Considered valid	\result ≡ \null ∨ \result ≡ \old(s)
+FRAMAC_SHARE/libc	stdio.h	218	fputc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	221	fputs	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	221	fputs	from clause	Considered valid	assigns *stream \from *(s+(..));
+FRAMAC_SHARE/libc	stdio.h	225	getc	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	225	getc	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	225	getc	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	228	getchar	from clause	Considered valid	assigns \result \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	229	getchar	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	231	gets	assigns clause	Considered valid	assigns *(s+(..)), \result;
+FRAMAC_SHARE/libc	stdio.h	231	gets	from clause	Considered valid	assigns *(s+(..)) \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	232	gets	from clause	Considered valid	assigns \result \from s, __fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	233	gets	postcondition	Considered valid	\result ≡ \old(s) ∨ \result ≡ \null
+FRAMAC_SHARE/libc	stdio.h	237	putc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	237	putc	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	240	putchar	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	240	putchar	from clause	Considered valid	assigns *__fc_stdout \from c;
+FRAMAC_SHARE/libc	stdio.h	243	puts	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	243	puts	from clause	Considered valid	assigns *__fc_stdout \from *(s+(..));
+FRAMAC_SHARE/libc	stdio.h	246	ungetc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	246	ungetc	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	252	fread	assigns clause	Considered valid	assigns *((char *)ptr+(0 .. nmemb*size-1)), \result;
+FRAMAC_SHARE/libc	stdio.h	252	fread	from clause	Considered valid	assigns *((char *)ptr+(0 .. nmemb*size-1)) \from size, nmemb, *stream;
+FRAMAC_SHARE/libc	stdio.h	253	fread	from clause	Considered valid	assigns \result \from size, *stream;
+FRAMAC_SHARE/libc	stdio.h	254	fread	postcondition	Considered valid	\result ≤ \old(nmemb)
+FRAMAC_SHARE/libc	stdio.h	255	fread	postcondition	Considered valid	\initialized((char *)\old(ptr)+(0 .. \result*\old(size)-1))
+FRAMAC_SHARE/libc	stdio.h	265	fwrite	assigns clause	Considered valid	assigns *stream, \result;
+FRAMAC_SHARE/libc	stdio.h	265	fwrite	from clause	Considered valid	assigns *stream \from *((char *)ptr+(0 .. nmemb*size-1));
+FRAMAC_SHARE/libc	stdio.h	265	fwrite	from clause	Considered valid	assigns \result \from *((char *)ptr+(0 .. nmemb*size-1));
+FRAMAC_SHARE/libc	stdio.h	266	fwrite	postcondition	Considered valid	\result ≤ \old(nmemb)
+FRAMAC_SHARE/libc	stdio.h	273	fgetpos	assigns clause	Considered valid	assigns *pos;
+FRAMAC_SHARE/libc	stdio.h	273	fgetpos	from clause	Considered valid	assigns *pos \from *stream;
+FRAMAC_SHARE/libc	stdio.h	277	fseek	assigns clause	Considered valid	assigns *stream, __FC_errno;
+FRAMAC_SHARE/libc	stdio.h	277	fseek	from clause	Considered valid	assigns *stream \from offset, whence;
+FRAMAC_SHARE/libc	stdio.h	281	fsetpos	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	281	fsetpos	from clause	Considered valid	assigns *stream \from *pos;
+FRAMAC_SHARE/libc	stdio.h	284	ftell	assigns clause	Considered valid	assigns \result, __FC_errno;
+FRAMAC_SHARE/libc	stdio.h	284	ftell	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	284	ftell	from clause	Considered valid	assigns __FC_errno \from *stream;
+FRAMAC_SHARE/libc	stdio.h	287	rewind	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	287	rewind	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	290	clearerr	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	290	clearerr	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	293	feof	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	294	feof	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	296	fileno	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	297	fileno	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	299	flockfile	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	299	flockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	302	funlockfile	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	302	funlockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	305	ftrylockfile	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	305	ftrylockfile	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	305	ftrylockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	308	ferror	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	309	ferror	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	311	perror	assigns clause	Considered valid	assigns __fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	311	perror	from clause	Considered valid	assigns __fc_stdout \from __FC_errno, *(s+(..));
+FRAMAC_SHARE/libc	stdio.h	314	getc_unlocked	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	314	getc_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	314	getc_unlocked	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	316	getchar_unlocked	from clause	Considered valid	assigns \result \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	317	getchar_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	318	putc_unlocked	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	318	putc_unlocked	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	320	putchar_unlocked	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	320	putchar_unlocked	from clause	Considered valid	assigns *__fc_stdout \from c;
+FRAMAC_SHARE/libc	stdio.h	323	clearerr_unlocked	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	323	clearerr_unlocked	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	325	feof_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	326	feof_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	327	ferror_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	328	ferror_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	329	fileno_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	330	fileno_unlocked	assigns clause	Considered valid	assigns \nothing;

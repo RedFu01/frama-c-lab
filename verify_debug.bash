@@ -1,1 +1,1 @@
-frama-c-gui -slevel 10 -warn-decimal-float 0 -val ./src/main.c
+frama-c-gui -slevel 10 -val ./src/one.c

@@ -1,1 +1,1 @@
-frama-c -wp -wp-rte -wp-proof alt-ergo ./src/main.c
+frama-c -wp -wp-rte -wp-proof alt-ergo ./src/one.c
